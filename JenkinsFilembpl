@@ -1,0 +1,22 @@
+pipeline{
+
+agent any
+
+tools {
+    maven 'maven-3.9.5'
+}
+
+stages{
+	stage('checkoutcode'){
+		steps{
+			git branch: 'development', credentialsId: 'github-credentials', url: 'https://github.com/dineshsv/maven-web-application.git'
+		}		
+	}
+	
+	stage('build'){
+		steps{
+			sh "mvn clean package"
+		}
+	}
+}
+}
